@@ -1,9 +1,20 @@
 #pragma once
 
-#include <string.h>
+//#include <string.h> //Not necessary
 #include "Class.h"
 
+
+/* Reduce damage by proportion
+ * Example: 50 damage vs. 100 defense.
+ * 50 / 100 = 0.5, 0.5 * 50 = 25 damage.
+ * If damage is 1/2 armor, damage is multiplied by 1/2
+ * If damage is 1/7 armor, damage is multiplied by 1/7
+ * If damage is less than 1/10 armor, deals 0 damage (blocked entirely)
+ * If damage > armor, damage doesn't change
+ */
 double calcDamage(double a, double d) {
+	if (a > d) return a;
+
 	double m = a / d;
 
 	if (m < 0.1) return 0;
